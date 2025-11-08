@@ -1,0 +1,27 @@
+{
+  "material": {
+    "itemCode": "MANGO_250ML",
+    "itemName": "Mango Delight Juice 250ml",
+    "arabicDescription": "عصير المانجو اللذيذ ٢٥٠ مل",
+    "salesOrgCode": "AE_DUBAI",
+    "baseUOM": "PCS",
+    "brandCode": "B01",
+    "brandName": "Oasis Pure",
+    "categoryCode": "C101",
+    "categoryName": "Ready-to-Drink Juices",
+    "isActive": "1",
+    "isBatchEnabled": true,
+    "businessType": "F&B",
+    "businessTypeDescription": "Food & Beverage - Consumable",
+    "uomList": [
+      {
+        "uom": "PCS",
+        "conversionFactor": 1
+      },
+      {
+        "uom": "CARTON",
+        "conversionFactor": 24
+      }
+    ]
+  }
+}

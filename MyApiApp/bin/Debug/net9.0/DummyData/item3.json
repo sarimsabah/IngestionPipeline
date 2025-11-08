@@ -1,0 +1,27 @@
+{
+  "material": {
+    "itemCode": "OAT_CRUNCH_500G",
+    "itemName": "Organic Oat Crunch Cereal 500g",
+    "arabicDescription": "الحبوب العضويه الغنيه بالشوفان الشهيه ٥٠٠ غ",
+    "salesOrgCode": "AE_ABUDHABI",
+    "baseUOM": "BOX",
+    "brandCode": "B07",
+    "brandName": "Nutri Start",
+    "categoryCode": "C205",
+    "categoryName": "Breakfast Cereals",
+    "isActive": "1",
+    "isBatchEnabled": false,
+    "businessType": "F&B",
+    "businessTypeDescription": "Food & Beverage - Dry Goods",
+    "uomList": [
+      {
+        "uom": "BOX",
+        "conversionFactor": 1
+      },
+      {
+        "uom": "PALLET",
+        "conversionFactor": 400
+      }
+    ]
+  }
+}

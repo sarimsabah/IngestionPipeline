@@ -1,0 +1,27 @@
+{
+  "material": {
+    "itemCode": "OFFICE_A4_PKT",
+    "itemName": "A4 White Printer Paper 80gsm",
+    "arabicDescription": "A4 ورق طابعة ابيض",
+    "salesOrgCode": "GCC_SAUDI",
+    "baseUOM": "PKT",
+    "brandCode": "B15",
+    "brandName": "PrintFlow",
+    "categoryCode": "C501",
+    "categoryName": "Office Supplies",
+    "isActive": "0",
+    "isBatchEnabled": false,
+    "businessType": "SUPPLY",
+    "businessTypeDescription": "General Office Supplies",
+    "uomList": [
+      {
+        "uom": "PKT",
+        "conversionFactor": 1
+      },
+      {
+        "uom": "CASE",
+        "conversionFactor": 5
+      }
+    ]
+  }
+}
