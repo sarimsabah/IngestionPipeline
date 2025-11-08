@@ -1,3 +1,8 @@
+# UI Metrics
+<img width="1454" height="780" alt="image" src="https://github.com/user-attachments/assets/bf72cb62-1a1e-46b6-874b-7d476e371f07" />
+<img width="1408" height="810" alt="image" src="https://github.com/user-attachments/assets/c9688aac-6f45-4785-942f-ddb85efd0b23" />
+
+
 # 📚 Complete API Implementation Guide
 
 ## Table of Contents
@@ -1182,3 +1187,4 @@ This system provides:
 
 For quick start instructions, see `QUICK_START.md`
 For testing details, see `README_TESTING.md`
+
