@@ -112,57 +112,14 @@ app.MapPost("/api/v1/customers/ingest", [Authorize] async (
         });
     }
 
-    // Validation passed
+    // Validation passed - Queue for background processing
     var referenceId = logId.ToString(); // Use log_id as referenceId
     ingestionLog.Status = "SUCCESS";
     ingestionLog.HttpStatus = 202;
     ingestionLog.ReferenceId = referenceId;
+    ingestionLog.ProcessStatus = "PENDING"; // Will be processed by background job
 
     await dbContext.CustomerIngestionLogs.AddAsync(ingestionLog);
-
-    // Step 3: Create transaction record
-    var transaction = new CustomerTransactionEntity
-    {
-        LogId = logId,
-        CustomerCode = request.CustomerCode!,
-        CustomerName = request.CustomerName!,
-        TransactionType = "INSERT",
-        TransactionStatus = "PENDING",
-        ReferenceId = referenceId
-    };
-
-    try
-    {
-        // Check if customer already exists
-        var existingCustomer = await customerRepo.GetByCodeAsync(request.CustomerCode!);
-
-        if (existingCustomer != null)
-        {
-            transaction.TransactionType = "UPDATE";
-            MappingService.UpdateEntity(existingCustomer, request);
-            existingCustomer.ReferenceId = referenceId;
-            await customerRepo.UpdateAsync(existingCustomer);
-        }
-        else
-        {
-            var customerEntity = MappingService.ToEntity(request, referenceId);
-            await customerRepo.CreateAsync(customerEntity);
-        }
-
-        transaction.TransactionStatus = "SUCCESS";
-        transaction.CompletedAt = DateTime.UtcNow;
-        ingestionLog.ProcessStatus = "PROCESSED";
-        ingestionLog.ProcessedAt = DateTime.UtcNow;
-    }
-    catch (Exception ex)
-    {
-        transaction.TransactionStatus = "FAILED";
-        transaction.ErrorMessage = ex.Message;
-        ingestionLog.ProcessStatus = "ERROR";
-        ingestionLog.ErrorMessage = ex.Message;
-    }
-
-    await dbContext.CustomerTransactions.AddAsync(transaction);
     await dbContext.SaveChangesAsync();
 
     return Results.Accepted(null, new SuccessResponse
@@ -181,6 +138,15 @@ app.MapGet("/api/v1/customers/dummy", [Authorize] (DummyDataService dummyDataSer
     return Results.Ok(dummyDataService.GetAllCustomers());
 })
 .WithName("GetDummyCustomers")
+.WithOpenApi();
+
+// Get All Customers from Database
+app.MapGet("/api/v1/customers", async (ICustomerRepository customerRepo) =>
+{
+    var customers = await customerRepo.GetAllAsync();
+    return Results.Ok(customers);
+})
+.WithName("GetAllCustomers")
 .WithOpenApi();
 
 // Item Ingest Endpoint
@@ -236,59 +202,14 @@ app.MapPost("/api/v1/items/ingest", [Authorize] async (
         });
     }
 
-    // Validation passed
+    // Validation passed - Queue for background processing
     var referenceId = logId.ToString(); // Use log_id as referenceId
     ingestionLog.Status = "SUCCESS";
     ingestionLog.HttpStatus = 202;
     ingestionLog.ReferenceId = referenceId;
+    ingestionLog.ProcessStatus = "PENDING"; // Will be processed by background job
 
     await dbContext.ItemIngestionLogs.AddAsync(ingestionLog);
-
-    // Step 3: Create transaction record
-    var transaction = new ItemTransactionEntity
-    {
-        LogId = logId,
-        ItemCode = request.Material!.ItemCode!,
-        ItemName = request.Material.ItemName!,
-        TransactionType = "INSERT",
-        TransactionStatus = "PENDING",
-        ReferenceId = referenceId
-    };
-
-    try
-    {
-        // Check if item already exists
-        var existingItem = await itemRepo.GetByCodeAsync(request.Material!.ItemCode!);
-
-        if (existingItem != null)
-        {
-            transaction.TransactionType = "UPDATE";
-            existingItem.ItemName = request.Material.ItemName ?? existingItem.ItemName;
-            existingItem.ArabicDescription = request.Material.ArabicDescription ?? existingItem.ArabicDescription;
-            existingItem.ReferenceId = referenceId;
-            existingItem.UpdatedAt = DateTime.UtcNow;
-            await itemRepo.UpdateAsync(existingItem);
-        }
-        else
-        {
-            var itemEntity = MappingService.ToEntity(request, referenceId);
-            await itemRepo.CreateAsync(itemEntity);
-        }
-
-        transaction.TransactionStatus = "SUCCESS";
-        transaction.CompletedAt = DateTime.UtcNow;
-        ingestionLog.ProcessStatus = "PROCESSED";
-        ingestionLog.ProcessedAt = DateTime.UtcNow;
-    }
-    catch (Exception ex)
-    {
-        transaction.TransactionStatus = "FAILED";
-        transaction.ErrorMessage = ex.Message;
-        ingestionLog.ProcessStatus = "ERROR";
-        ingestionLog.ErrorMessage = ex.Message;
-    }
-
-    await dbContext.ItemTransactions.AddAsync(transaction);
     await dbContext.SaveChangesAsync();
 
     return Results.Accepted(null, new SuccessResponse
@@ -307,6 +228,15 @@ app.MapGet("/api/v1/items/dummy", [Authorize] (DummyDataService dummyDataService
     return Results.Ok(dummyDataService.GetAllItems());
 })
 .WithName("GetDummyItems")
+.WithOpenApi();
+
+// Get All Items from Database
+app.MapGet("/api/v1/items", async (IItemRepository itemRepo) =>
+{
+    var items = await itemRepo.GetAllAsync();
+    return Results.Ok(items);
+})
+.WithName("GetAllItems")
 .WithOpenApi();
 
 // Dashboard Endpoints (No Auth for easier access)

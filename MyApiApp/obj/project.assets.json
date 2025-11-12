@@ -2878,19 +2878,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/turbostart-blr-lap0061/.nuget/packages/": {}
+    "C:\\Users\\DELL\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/turbostart-blr-lap0061/Desktop/MyAPI/MyApiApp/MyApiApp.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\OneDrive\\Desktop\\Ingestion pipeline\\IngestionPipeline\\MyApiApp\\MyApiApp.csproj",
       "projectName": "MyApiApp",
-      "projectPath": "/Users/turbostart-blr-lap0061/Desktop/MyAPI/MyApiApp/MyApiApp.csproj",
-      "packagesPath": "/Users/turbostart-blr-lap0061/.nuget/packages/",
-      "outputPath": "/Users/turbostart-blr-lap0061/Desktop/MyAPI/MyApiApp/obj/",
+      "projectPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\Ingestion pipeline\\IngestionPipeline\\MyApiApp\\MyApiApp.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\Ingestion pipeline\\IngestionPipeline\\MyApiApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/turbostart-blr-lap0061/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -2960,7 +2960,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
